@@ -26,5 +26,7 @@ namespace WpfLibTest
 
         public List<EnumItem> Items { get; set; }
         public EnumItem SelectedItem { get; set; }
+
+        public double SliderValue { get; set; }
     }
 }
