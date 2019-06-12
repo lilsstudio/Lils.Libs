@@ -8,9 +8,9 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Lils.WpfLib")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Tools & Resources for WPF")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Lymims")]
 [assembly: AssemblyProduct("Lils.WpfLib")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
