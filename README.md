@@ -27,6 +27,8 @@
 </StackPanel>
 ```
 
+![](.res/md/img/EnumToBooleanConverter.gif)
+
 #### DoubleArithmeticConverter
 
 ```XAML
@@ -49,3 +51,5 @@
     <Slider Value="{Binding SliderValue, Converter={StaticResource DoublePlusConverter}, ConverterParameter=-10}"/>
 </StackPanel>
 ```
+
+![](.res/md/img/DoubleArithmeticConverter.gif)
