@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Converters\DoubleArithmeticConverter.cs" />
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Converters\StringToBooleanConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

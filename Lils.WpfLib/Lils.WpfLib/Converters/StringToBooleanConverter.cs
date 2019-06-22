@@ -9,17 +9,16 @@ using System.Windows.Data;
 
 namespace Lils.WpfLib.Converters
 {
-    [ValueConversion(typeof(object), typeof(bool))]
-    public class EnumToBooleanConverter : IValueConverter
+    [ValueConversion(typeof(string), typeof(bool))]
+    public class StringToBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(parameter is string parameterString))
                 return DependencyProperty.UnsetValue;
-            if (Enum.IsDefined(value.GetType(), value) == false)
+            if (!(value is string stringValue))
                 return DependencyProperty.UnsetValue;
-            object parameterValue = Enum.Parse(value.GetType(), parameterString);
-            return parameterValue.Equals(value);
+            return parameterString == stringValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -28,9 +27,9 @@ namespace Lils.WpfLib.Converters
                 return DependencyProperty.UnsetValue;
 
             if ((bool)value != true)
-                return DependencyProperty.UnsetValue;
+                return string.Empty;
 
-            return Enum.Parse(targetType, parameterString);
+            return parameterString;
         }
     }
 }

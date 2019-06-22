@@ -12,8 +12,6 @@ namespace WpfLibTest
         ItemA,
         ItemB,
         ItemC,
-        ItemD,
-        ItemE,
     }
 
     class MainWindowViewModel : BindableBase
@@ -26,6 +24,8 @@ namespace WpfLibTest
 
         public List<EnumItem> Items { get; set; }
         public EnumItem SelectedItem { get; set; }
+
+        public string SampleText { get; set; }
 
         public double SliderValue { get; set; }
     }
