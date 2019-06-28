@@ -15,52 +15,87 @@
         <converters:DoubleArithmeticConverter x:Key="DoubleTimesConverter" Operator="Times" DefaultOperateValue="2"/>
         <converters:DoubleArithmeticConverter x:Key="DoublePlusConverter" Operator="Plus" DefaultOperateValue="10"/>
     </Window.Resources>
-    <StackPanel>
-        <TextBlock Text="EnumToBooleanConverter"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <StackPanel>
-                <RadioButton GroupName="Group1" Content="Radio1" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemA}"/>
-                <RadioButton GroupName="Group2" Content="Radio2" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemB}"/>
-                <RadioButton GroupName="Group3" Content="Radio3" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemC}"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1">
-                <CheckBox Content="CheckBox1" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemA}"/>
-                <CheckBox Content="CheckBox2" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemB}"/>
-                <CheckBox Content="CheckBox3" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemC}"/>
-            </StackPanel>
-            <ListBox Grid.Column="2" VerticalAlignment="Top" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"/>
-        </Grid>
-        <TextBlock Text="StringToBooleanConverter"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <StackPanel>
-                <RadioButton GroupName="Fruit1" Content="CheckBoxApple" IsChecked="{Binding SampleText, Converter={StaticResource StringToBooleanConverter}, ConverterParameter=Apple}"/>
-                <RadioButton GroupName="Fruit2" Content="CheckBoxBanana" IsChecked="{Binding SampleText, Converter={StaticResource StringToBooleanConverter}, ConverterParameter=Banana}"/>
-                <RadioButton GroupName="Fruit3" Content="CheckBoxBerry" IsChecked="{Binding SampleText, Converter={StaticResource StringToBooleanConverter}, ConverterParameter=Berry}"/>
-            </StackPanel>
-            <TextBox Grid.Column="1" Text="{Binding SampleText, UpdateSourceTrigger=PropertyChanged}"/>
-        </Grid>
-        <TextBlock Text="DoubleArithmeticConverter"/>
-        <StackPanel>
-            <StackPanel.Resources>
-                <Style TargetType="Slider">
-                    <Setter Property="Minimum" Value="0"/>
-                    <Setter Property="Maximum" Value="100"/>
-                </Style>
-            </StackPanel.Resources>
-            <Slider Value="{Binding SliderValue}"/>
-            <Slider Value="{Binding SliderValue, Converter={StaticResource DoubleTimesConverter}}"/>
-            <Slider Value="{Binding SliderValue, Converter={StaticResource DoubleTimesConverter}, ConverterParameter=0.5}"/>
-            <Slider Value="{Binding SliderValue, Converter={StaticResource DoublePlusConverter}}"/>
-            <Slider Value="{Binding SliderValue, Converter={StaticResource DoublePlusConverter}, ConverterParameter=-10}"/>
-        </StackPanel>
+    <StackPanel Margin="10,0">
+        <StackPanel.Resources>
+            <Style TargetType="GroupBox">
+                <Setter Property="Margin" Value="0,20,0,0"/>
+            </Style>
+        </StackPanel.Resources>
+        <GroupBox Header="EnumToBooleanConverter">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <RadioButton GroupName="Group1" Content="Radio1" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemA}"/>
+                    <RadioButton GroupName="Group2" Content="Radio2" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemB}"/>
+                    <RadioButton GroupName="Group3" Content="Radio3" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemC}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <CheckBox Content="CheckBox1" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemA}"/>
+                    <CheckBox Content="CheckBox2" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemB}"/>
+                    <CheckBox Content="CheckBox3" IsChecked="{Binding SelectedItem, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ItemC}"/>
+                </StackPanel>
+                <ListBox Grid.Column="2" VerticalAlignment="Top" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="StringToBooleanConverter">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <RadioButton GroupName="Fruit1" Content="CheckBoxApple" IsChecked="{Binding SampleText, Converter={StaticResource StringToBooleanConverter}, ConverterParameter=Apple}"/>
+                    <RadioButton GroupName="Fruit2" Content="CheckBoxBanana" IsChecked="{Binding SampleText, Converter={StaticResource StringToBooleanConverter}, ConverterParameter=Banana}"/>
+                    <RadioButton GroupName="Fruit3" Content="CheckBoxBerry" IsChecked="{Binding SampleText, Converter={StaticResource StringToBooleanConverter}, ConverterParameter=Berry}"/>
+                </StackPanel>
+                <TextBox Grid.Column="1" Text="{Binding SampleText, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="DoubleArithmeticConverter">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Margin" Value="3,0"/>
+                    </Style>
+                    <Style TargetType="Slider">
+                        <Setter Property="Minimum" Value="0"/>
+                        <Setter Property="Maximum" Value="100"/>
+                        <Setter Property="Grid.Column" Value="2"/>
+                    </Style>
+                </Grid.Resources>
+                <TextBlock Grid.Row="0" Text="a ="/>
+                <TextBlock Grid.Row="1" Text="a * 2 ="/>
+                <TextBlock Grid.Row="2" Text="a * 0.5 ="/>
+                <TextBlock Grid.Row="3" Text="a + 10 ="/>
+                <TextBlock Grid.Row="4" Text="a - 10 ="/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SliderValue, StringFormat=F}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SliderValue, StringFormat=F, Converter={StaticResource DoubleTimesConverter}}"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SliderValue, StringFormat=F, Converter={StaticResource DoubleTimesConverter}, ConverterParameter=0.5}"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SliderValue, StringFormat=F, Converter={StaticResource DoublePlusConverter}}"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding SliderValue, StringFormat=F, Converter={StaticResource DoublePlusConverter}, ConverterParameter=-10}"/>
+                <Slider Grid.Row="0" Value="{Binding SliderValue}"/>
+                <Slider Grid.Row="1" Value="{Binding SliderValue, Converter={StaticResource DoubleTimesConverter}}"/>
+                <Slider Grid.Row="2" Value="{Binding SliderValue, Converter={StaticResource DoubleTimesConverter}, ConverterParameter=0.5}"/>
+                <Slider Grid.Row="3" Value="{Binding SliderValue, Converter={StaticResource DoublePlusConverter}}"/>
+                <Slider Grid.Row="4" Value="{Binding SliderValue, Converter={StaticResource DoublePlusConverter}, ConverterParameter=-10}"/>
+            </Grid>
+        </GroupBox>
     </StackPanel>
 </Window>
