@@ -4,9 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfLibTest.Samples"
+             xmlns:controls="clr-namespace:Lils.WpfLib.Controls;assembly=Lils.WpfLib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Slider/>
+        <controls:ContentSlider Name="ContentSlider" Width="30" Height="300">
+            <Rectangle>
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Offset="0.000" Color="Red"/>
+                        <GradientStop Offset="0.166" Color="Yellow"/>
+                        <GradientStop Offset="0.333" Color="Lime"/>
+                        <GradientStop Offset="0.500" Color="Cyan"/>
+                        <GradientStop Offset="0.666" Color="Blue"/>
+                        <GradientStop Offset="0.833" Color="Magenta"/>
+                        <GradientStop Offset="1.000" Color="Red"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </controls:ContentSlider>
+        <TextBlock Text="{Binding ElementName=ContentSlider, Path=Value}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

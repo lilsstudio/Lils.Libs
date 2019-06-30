@@ -10,14 +10,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel Margin="10,0">
+    <Grid Margin="10,0">
         <TabControl>
             <TabItem Header="Converters">
                 <samples:ConverterSampleView/>
             </TabItem>
-            <TabItem Header="Sliders">
+            <TabItem Header="Sliders" IsSelected="True">
                 <samples:SliderSampleView/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </Window>
