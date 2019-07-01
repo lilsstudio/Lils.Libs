@@ -48,6 +48,14 @@ namespace Lils.WpfLib.Controls
             set { SetValue(MinimumProperty, value); }
         }
 
+
+
+        public Orientation Orientation
+        {
+            get { return (Orientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
+
         public double Value
         {
             get { return (double)GetValue(ValueProperty); }
@@ -66,6 +74,9 @@ namespace Lils.WpfLib.Controls
 
         public static readonly DependencyProperty MinimumProperty =
             DependencyProperty.Register("Minimum", typeof(double), typeof(ContentSlider), new PropertyMetadata(1.0));
+
+        public static readonly DependencyProperty OrientationProperty =
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(ContentSlider), new PropertyMetadata(Orientation.Vertical));
 
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(double), typeof(ContentSlider), new PropertyMetadata(0.0));
@@ -88,16 +99,26 @@ namespace Lils.WpfLib.Controls
         private void ContentGrid_MouseAction(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Released)
-            {
                 return;
+
+            var mousePos = e.GetPosition(contentGrid);
+            double ratio = 0;
+
+            var limit = new Point(contentGrid.ActualWidth, contentGrid.ActualHeight);
+            mousePos = mousePos.Coerce(new Point(0, 0), limit);
+
+            if (Orientation == Orientation.Horizontal)
+            {
+                Canvas.SetLeft(pointer, mousePos.X);
+                ratio = 1 - (mousePos.X / contentGrid.ActualWidth);
             }
-            var point = e.GetPosition(contentGrid);
-            point = point.Coerce(0, contentGrid.ActualHeight);
-            Canvas.SetTop(pointer, point.Y);
+            else
+            {
+                Canvas.SetTop(pointer, mousePos.Y);
+                ratio = 1 - (mousePos.Y / contentGrid.ActualHeight);
+            }
 
-            var ratio = 1 - (point.Y / contentGrid.ActualHeight);
             Value = (Maximum - Minimum) * ratio + Minimum;
-
             Mouse.Capture(contentGrid);
         }
 
