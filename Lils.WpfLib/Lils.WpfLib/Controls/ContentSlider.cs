@@ -102,11 +102,10 @@ namespace Lils.WpfLib.Controls
                 return;
 
             var mousePos = e.GetPosition(contentGrid);
-            double ratio = 0;
-
             var limit = new Point(contentGrid.ActualWidth, contentGrid.ActualHeight);
             mousePos = mousePos.Coerce(new Point(0, 0), limit);
 
+            double ratio;
             if (Orientation == Orientation.Horizontal)
             {
                 Canvas.SetLeft(pointer, mousePos.X);
