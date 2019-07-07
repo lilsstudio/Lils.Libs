@@ -82,6 +82,7 @@
     <Compile Include="Samples\SliderSampleView.xaml.cs">
       <DependentUpon>SliderSampleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\SliderSampleViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

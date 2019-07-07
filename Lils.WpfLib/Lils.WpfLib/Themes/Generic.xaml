@@ -98,4 +98,85 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="{x:Type controls:ContentCube}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ContentCube}">
+                    <Grid Background="SkyBlue">
+                        <Viewport3D Width="200" Height="200">
+                            <Viewport3D.Camera>
+                                <PerspectiveCamera Position="15,15,15"
+                                                    LookDirection="-1,-1,-1"
+                                                    UpDirection="0,1,0" FieldOfView="60"
+                                                    FarPlaneDistance="100" NearPlaneDistance="1"/>
+                            </Viewport3D.Camera>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <AmbientLight Color="White" />
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <GeometryModel3D>
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D Positions="0,0,0 10,0,0 10,10,0 0,10,0"
+                                                            TriangleIndices="0,1,2 2,3,0"
+                                                            TextureCoordinates="0 1,1 1,1 0,0 0"
+                                                            Normals="0,1,0 0,1,0"/>
+                                        </GeometryModel3D.Geometry>
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <VisualBrush Visual="{TemplateBinding XYContent}"/>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
+                                    </GeometryModel3D>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <GeometryModel3D>
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D Positions="0,0,10 0,0,0 0,10,0 0,10,10"
+                                                            TriangleIndices="0,1,2 2,3,0"
+                                                            TextureCoordinates="1 1 0 1 0 0 1 0"
+                                                            Normals="0,1,0 0,1,0"/>
+                                        </GeometryModel3D.Geometry>
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <VisualBrush Visual="{TemplateBinding ZYContent}"/>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
+                                    </GeometryModel3D>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <GeometryModel3D>
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D Positions="0,0,10 10,0,10 10,0,0 0,0,0"
+                                                            TriangleIndices="0,1,2 2,3,0"
+                                                            TextureCoordinates="1 1,1 0,0 0,0 1"
+                                                            Normals="0,1,0 0,1,0"/>
+                                        </GeometryModel3D.Geometry>
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <VisualBrush Visual="{TemplateBinding XZContent}"/>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
+                                    </GeometryModel3D>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                        </Viewport3D>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

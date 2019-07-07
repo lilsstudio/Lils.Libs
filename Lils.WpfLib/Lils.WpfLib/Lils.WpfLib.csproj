@@ -49,6 +49,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ContentCube.cs" />
     <Compile Include="Controls\ContentSlider.cs" />
     <Compile Include="Converters\DoubleArithmeticConverter.cs" />
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
