@@ -11,7 +11,6 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     <UserControl.Resources>
         <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
-        <converters:DoubleArithmeticConverter x:Key="ByteToDoubleConverter" Operator="Times" DefaultOperateValue="0.00390625"/>
     </UserControl.Resources>
     <StackPanel Margin="10,0">
         <StackPanel.Resources>
@@ -167,49 +166,7 @@
             <StackPanel Orientation="Horizontal">
                 <Slider Name="slider1" Orientation="Vertical" Minimum="0" Maximum="0.995" Margin="5,0"
                         Value="{Binding RedValuePercent}"/>
-                <Viewport3D x:Name="Layer" Width="100" Height="100" Margin="30,0">
-                    <Viewport3D.Camera>
-                        <OrthographicCamera Position="0,0,70"
-                                            LookDirection="0,0,-1"
-                                            UpDirection="0,1,0"
-                                            FarPlaneDistance="100" NearPlaneDistance="1"/>
-                    </Viewport3D.Camera>
-                    <ModelVisual3D>
-                        <ModelVisual3D.Content>
-                            <DirectionalLight Color="White" Direction="0,0,-1"/>
-                        </ModelVisual3D.Content>
-                    </ModelVisual3D>
-                    <ModelVisual3D>
-                        <ModelVisual3D.Content>
-                            <AmbientLight Color="Yellow"/>
-                        </ModelVisual3D.Content>
-                    </ModelVisual3D>
-                    <ModelVisual3D>
-                        <ModelVisual3D.Content>
-                            <GeometryModel3D>
-                                <GeometryModel3D.Geometry>
-                                    <MeshGeometry3D Positions="-1,-1,0 1,-1,0 1,1,0 -1,1,0"
-                                                    TriangleIndices="0,1,2 2,3,0"
-                                                    TextureCoordinates="1 0,0 0,0 1,1 1"
-                                                    Normals="0,1,0 0,1,0"/>
-                                </GeometryModel3D.Geometry>
-                                <GeometryModel3D.Material>
-                                    <DiffuseMaterial>
-                                        <DiffuseMaterial.Brush>
-                                            <LinearGradientBrush EndPoint="1,1" StartPoint="0,1">
-                                                <!--(1,r,1)-->
-                                                <GradientStop x:Name="Stop1r1" Color="{Binding GreenMax}"/>
-                                                <!--(1,r,0)-->
-                                                <GradientStop x:Name="Stop1r0" Color="{Binding GreenMin}" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </DiffuseMaterial.Brush>
-                                    </DiffuseMaterial>
-                                </GeometryModel3D.Material>
-                            </GeometryModel3D>
-                        </ModelVisual3D.Content>
-                    </ModelVisual3D>
-                </Viewport3D>
-                <controls:ContentCube Width="100" Height="100"
+                <controls:ContentCube Width="200" Height="100"
                                       XYContent="{StaticResource brViewPort}"
                                       ZYContent="{StaticResource grViewPort}"
                                       XZContent="{StaticResource bgViewPort}"
@@ -217,7 +174,52 @@
                     <controls:ContentCube.LayerContent>
                         <Border Width="100" Height="100">
                             <Border.Background>
-                                <VisualBrush Visual="{Binding ElementName=Layer}"/>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <Viewport3D x:Name="Layer" Width="60" Height="60" Margin="30,0">
+                                            <Viewport3D.Camera>
+                                                <OrthographicCamera Position="0,0,70"
+                                                                    LookDirection="0,0,-1"
+                                                                    UpDirection="0,1,0"
+                                                                    FarPlaneDistance="100" NearPlaneDistance="1"/>
+                                            </Viewport3D.Camera>
+                                            <ModelVisual3D>
+                                                <ModelVisual3D.Content>
+                                                    <DirectionalLight Color="White" Direction="0,0,-1"/>
+                                                </ModelVisual3D.Content>
+                                            </ModelVisual3D>
+                                            <ModelVisual3D>
+                                                <ModelVisual3D.Content>
+                                                    <AmbientLight Color="Yellow"/>
+                                                </ModelVisual3D.Content>
+                                            </ModelVisual3D>
+                                            <ModelVisual3D>
+                                                <ModelVisual3D.Content>
+                                                    <GeometryModel3D>
+                                                        <GeometryModel3D.Geometry>
+                                                            <MeshGeometry3D Positions="-1,-1,0 1,-1,0 1,1,0 -1,1,0"
+                                                                            TriangleIndices="0,1,2 2,3,0"
+                                                                            TextureCoordinates="1 0,0 0,0 1,1 1"
+                                                                            Normals="0,1,0 0,1,0"/>
+                                                        </GeometryModel3D.Geometry>
+                                                        <GeometryModel3D.Material>
+                                                            <DiffuseMaterial>
+                                                                <DiffuseMaterial.Brush>
+                                                                    <LinearGradientBrush EndPoint="1,1" StartPoint="0,1">
+                                                                        <!--(1,r,1)-->
+                                                                        <GradientStop Color="{Binding GreenMax}"/>
+                                                                        <!--(1,r,0)-->
+                                                                        <GradientStop Color="{Binding GreenMin}" Offset="1"/>
+                                                                    </LinearGradientBrush>
+                                                                </DiffuseMaterial.Brush>
+                                                            </DiffuseMaterial>
+                                                        </GeometryModel3D.Material>
+                                                    </GeometryModel3D>
+                                                </ModelVisual3D.Content>
+                                            </ModelVisual3D>
+                                        </Viewport3D>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
                             </Border.Background>
                         </Border>
                     </controls:ContentCube.LayerContent>

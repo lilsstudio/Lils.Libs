@@ -101,119 +101,118 @@
     </Style>
 
     <Style TargetType="{x:Type controls:ContentCube}">
-        <Setter Property="Width" Value="100"/>
+        <Setter Property="Width" Value="200"/>
         <Setter Property="Height" Value="100"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ContentCube}">
-                    <Viewport3D>
-                        <Viewport3D.Camera>
-                            <PerspectiveCamera Position="15,15,15"
-                                                LookDirection="-1,-1,-1"
-                                                UpDirection="0,1,0" FieldOfView="60"
-                                                FarPlaneDistance="100" NearPlaneDistance="1"/>
-                        </Viewport3D.Camera>
-                        <ModelVisual3D>
-                            <ModelVisual3D.Content>
-                                <AmbientLight Color="White" />
-                            </ModelVisual3D.Content>
-                        </ModelVisual3D>
-                        <ModelVisual3D>
-                            <ModelVisual3D.Content>
-                                <GeometryModel3D>
-                                    <GeometryModel3D.Geometry>
-                                        <MeshGeometry3D Positions="0,0,0 10,0,0 10,10,0 0,10,0"
-                                                        TriangleIndices="0,1,2 2,3,0"
-                                                        TextureCoordinates="0 1,1 1,1 0,0 0"
-                                                        Normals="0,1,0 0,1,0"/>
-                                    </GeometryModel3D.Geometry>
-                                    <GeometryModel3D.Material>
-                                        <DiffuseMaterial>
-                                            <DiffuseMaterial.Brush>
-                                                <VisualBrush>
-                                                    <VisualBrush.Visual>
-                                                        <ContentControl Content="{TemplateBinding XYContent}"/>
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </DiffuseMaterial.Brush>
-                                        </DiffuseMaterial>
-                                    </GeometryModel3D.Material>
-                                </GeometryModel3D>
-                            </ModelVisual3D.Content>
-                        </ModelVisual3D>
-                        <ModelVisual3D>
-                            <ModelVisual3D.Content>
-                                <GeometryModel3D>
-                                    <GeometryModel3D.Geometry>
-                                        <MeshGeometry3D Positions="0,0,10 0,0,0 0,10,0 0,10,10"
-                                                        TriangleIndices="0,1,2 2,3,0"
-                                                        TextureCoordinates="1 1 0 1 0 0 1 0"
-                                                        Normals="0,1,0 0,1,0"/>
-                                    </GeometryModel3D.Geometry>
-                                    <GeometryModel3D.Material>
-                                        <DiffuseMaterial>
-                                            <DiffuseMaterial.Brush>
-                                                <VisualBrush>
-                                                    <VisualBrush.Visual>
-                                                        <ContentControl Content="{TemplateBinding ZYContent}"/>
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </DiffuseMaterial.Brush>
-                                        </DiffuseMaterial>
-                                    </GeometryModel3D.Material>
-                                </GeometryModel3D>
-                            </ModelVisual3D.Content>
-                        </ModelVisual3D>
-                        <ModelVisual3D>
-                            <ModelVisual3D.Content>
-                                <GeometryModel3D>
-                                    <GeometryModel3D.Geometry>
-                                        <MeshGeometry3D Positions="0,0,10 10,0,10 10,0,0 0,0,0"
-                                                        TriangleIndices="0,1,2 2,3,0"
-                                                        TextureCoordinates="1 1,1 0,0 0,0 1"
-                                                        Normals="0,1,0 0,1,0"/>
-                                    </GeometryModel3D.Geometry>
-                                    <GeometryModel3D.Material>
-                                        <DiffuseMaterial>
-                                            <DiffuseMaterial.Brush>
-                                                <VisualBrush>
-                                                    <VisualBrush.Visual>
-                                                        <ContentControl Content="{TemplateBinding XZContent}"/>
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </DiffuseMaterial.Brush>
-                                        </DiffuseMaterial>
-                                    </GeometryModel3D.Material>
-                                </GeometryModel3D>
-                            </ModelVisual3D.Content>
-                        </ModelVisual3D>
-                        <ModelVisual3D>
-                            <ModelVisual3D.Content>
-                                <GeometryModel3D>
-                                    <GeometryModel3D.Geometry>
-                                        <MeshGeometry3D Positions="0,0,10 10,0,10 10,0,0 0,0,0"
-                                                        TriangleIndices="0,1,2 2,3,0"
-                                                        TextureCoordinates="1 1,1 0,0 0,0 1"
-                                                        Normals="0,1,0 0,1,0"/>
-                                    </GeometryModel3D.Geometry>
-                                    <GeometryModel3D.Material>
-                                        <DiffuseMaterial>
-                                            <DiffuseMaterial.Brush>
-                                                <VisualBrush>
-                                                    <VisualBrush.Visual>
-                                                        <ContentControl Content="{TemplateBinding LayerContent}"/>
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </DiffuseMaterial.Brush>
-                                        </DiffuseMaterial>
-                                    </GeometryModel3D.Material>
-                                    <GeometryModel3D.Transform>
-                                        <TranslateTransform3D x:Name="PART_MoveYTranslate" OffsetY="{TemplateBinding YOffset, Converter={StaticResource TimesConverter}, ConverterParameter=10}"/>
-                                    </GeometryModel3D.Transform>
-                                </GeometryModel3D>
-                            </ModelVisual3D.Content>
-                        </ModelVisual3D>
-                    </Viewport3D>
+                    <UniformGrid Rows="1">
+                        <ContentControl x:Name="LayerControl" Content="{TemplateBinding LayerContent}"/>
+                        <Viewport3D>
+                            <Viewport3D.Camera>
+                                <PerspectiveCamera Position="15,15,15"
+                                                    LookDirection="-1,-1,-1"
+                                                    UpDirection="0,1,0" FieldOfView="60"
+                                                    FarPlaneDistance="100" NearPlaneDistance="1"/>
+                            </Viewport3D.Camera>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <AmbientLight Color="White" />
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <GeometryModel3D>
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D Positions="0,0,0 10,0,0 10,10,0 0,10,0"
+                                                            TriangleIndices="0,1,2 2,3,0"
+                                                            TextureCoordinates="0 1,1 1,1 0,0 0"
+                                                            Normals="0,1,0 0,1,0"/>
+                                        </GeometryModel3D.Geometry>
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <VisualBrush>
+                                                        <VisualBrush.Visual>
+                                                            <ContentControl Content="{TemplateBinding XYContent}"/>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
+                                    </GeometryModel3D>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <GeometryModel3D>
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D Positions="0,0,10 0,0,0 0,10,0 0,10,10"
+                                                            TriangleIndices="0,1,2 2,3,0"
+                                                            TextureCoordinates="1 1 0 1 0 0 1 0"
+                                                            Normals="0,1,0 0,1,0"/>
+                                        </GeometryModel3D.Geometry>
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <VisualBrush>
+                                                        <VisualBrush.Visual>
+                                                            <ContentControl Content="{TemplateBinding ZYContent}"/>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
+                                    </GeometryModel3D>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <GeometryModel3D>
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D Positions="0,0,10 10,0,10 10,0,0 0,0,0"
+                                                            TriangleIndices="0,1,2 2,3,0"
+                                                            TextureCoordinates="1 1,1 0,0 0,0 1"
+                                                            Normals="0,1,0 0,1,0"/>
+                                        </GeometryModel3D.Geometry>
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <VisualBrush>
+                                                        <VisualBrush.Visual>
+                                                            <ContentControl Content="{TemplateBinding XZContent}"/>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
+                                    </GeometryModel3D>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <GeometryModel3D>
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D Positions="0,0,10 10,0,10 10,0,0 0,0,0"
+                                                            TriangleIndices="0,1,2 2,3,0"
+                                                            TextureCoordinates="1 1,1 0,0 0,0 1"
+                                                            Normals="0,1,0 0,1,0"/>
+                                        </GeometryModel3D.Geometry>
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <VisualBrush Visual="{Binding ElementName=LayerControl}"/>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
+                                        <GeometryModel3D.Transform>
+                                            <TranslateTransform3D x:Name="PART_MoveYTranslate" OffsetY="{TemplateBinding YOffset, Converter={StaticResource TimesConverter}, ConverterParameter=10}"/>
+                                        </GeometryModel3D.Transform>
+                                    </GeometryModel3D>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                        </Viewport3D>
+                    </UniformGrid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
