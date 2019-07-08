@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:Lils.WpfLib.Converters">
 
     <converters:DoubleArithmeticConverter x:Key="MoveCenterConverter" Operator="Times" DefaultOperateValue="-0.5"/>
+    <converters:DoubleArithmeticConverter x:Key="TimesConverter" Operator="Times" DefaultOperateValue="1"/>
 
     <Style TargetType="{x:Type controls:ContentSlider}">
         <Setter Property="Pointer">
@@ -183,6 +184,32 @@
                                             </DiffuseMaterial.Brush>
                                         </DiffuseMaterial>
                                     </GeometryModel3D.Material>
+                                </GeometryModel3D>
+                            </ModelVisual3D.Content>
+                        </ModelVisual3D>
+                        <ModelVisual3D>
+                            <ModelVisual3D.Content>
+                                <GeometryModel3D x:Name="PART_LayerModel3D">
+                                    <GeometryModel3D.Geometry>
+                                        <MeshGeometry3D Positions="0,0,10 10,0,10 10,0,0 0,0,0"
+                                                        TriangleIndices="0,1,2 2,3,0"
+                                                        TextureCoordinates="1 1,1 0,0 0,0 1"
+                                                        Normals="0,1,0 0,1,0"/>
+                                    </GeometryModel3D.Geometry>
+                                    <GeometryModel3D.Material>
+                                        <DiffuseMaterial>
+                                            <DiffuseMaterial.Brush>
+                                                <VisualBrush>
+                                                    <VisualBrush.Visual>
+                                                        <ContentControl Content="{TemplateBinding LayerContent}"/>
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </DiffuseMaterial.Brush>
+                                        </DiffuseMaterial>
+                                    </GeometryModel3D.Material>
+                                    <GeometryModel3D.Transform>
+                                        <TranslateTransform3D OffsetY="{TemplateBinding YOffset, Converter={StaticResource TimesConverter}, ConverterParameter=10}"/>
+                                    </GeometryModel3D.Transform>
                                 </GeometryModel3D>
                             </ModelVisual3D.Content>
                         </ModelVisual3D>
