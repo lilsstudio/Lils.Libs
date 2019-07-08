@@ -13,6 +13,7 @@ namespace Lils.WpfLib.Controls
     /// <summary>
     /// A slider can fill with content
     /// </summary>
+    [TemplatePart(Name = "PART_MoveYTranslate", Type = typeof(GeometryModel3D))]
     public class ContentCube : Control
     {
         static ContentCube()
@@ -20,7 +21,7 @@ namespace Lils.WpfLib.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ContentCube), new FrameworkPropertyMetadata(typeof(ContentCube)));
         }
 
-        GeometryModel3D layerGeometryModel;
+        TranslateTransform3D moveYTranslate;
 
         public ContentCube()
         {
@@ -73,13 +74,9 @@ namespace Lils.WpfLib.Controls
 
         private static void YOffsetPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ContentCube cube)
+            if (d is ContentCube cube && cube.moveYTranslate != null)
             {
-                if (cube.layerGeometryModel.Transform is TranslateTransform3D t3d)
-                {
-                    // TODO: replace this with binding
-                    t3d.OffsetY = (double)e.NewValue * 10;
-                }
+                cube.moveYTranslate.OffsetY = (double)e.NewValue * 10;
             }
         }
 
@@ -102,8 +99,7 @@ namespace Lils.WpfLib.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            layerGeometryModel = GetTemplateChild("PART_LayerModel3D") as GeometryModel3D;
+            moveYTranslate = GetTemplateChild("PART_MoveYTranslate") as TranslateTransform3D;
         }
     }
 }
