@@ -75,6 +75,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Samples\AnimateTreeViewSampleView.xaml.cs">
+      <DependentUpon>AnimateTreeViewSampleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\AnimateTreeViewSampleViewModel.cs" />
     <Compile Include="Samples\ConverterSampleView.xaml.cs">
       <DependentUpon>ConverterSampleView.xaml</DependentUpon>
     </Compile>
@@ -95,6 +99,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Samples\AnimateTreeViewSampleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Samples\ConverterSampleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +145,9 @@
       <Project>{7a5f404a-255b-46a8-8a59-5c29471719d8}</Project>
       <Name>Lils.WpfLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Personnel.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.4.2.1\build\Fody.targets" Condition="Exists('..\packages\Fody.4.2.1\build\Fody.targets')" />

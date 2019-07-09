@@ -4,6 +4,10 @@
     xmlns:controls="clr-namespace:Lils.WpfLib.Controls"
     xmlns:converters="clr-namespace:Lils.WpfLib.Converters">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Lils.WpfLib;component/Themes/AnimateTreeView.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <converters:DoubleArithmeticConverter x:Key="MoveCenterConverter" Operator="Times" DefaultOperateValue="-0.5"/>
     <converters:DoubleArithmeticConverter x:Key="TimesConverter" Operator="Times" DefaultOperateValue="1"/>
 

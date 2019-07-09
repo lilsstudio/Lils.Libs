@@ -18,6 +18,9 @@
             <TabItem Header="Sliders" IsSelected="True">
                 <samples:SliderSampleView/>
             </TabItem>
+            <TabItem Header="AnimateTreeView">
+                <samples:AnimateTreeViewSampleView/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
