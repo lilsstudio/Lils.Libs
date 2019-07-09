@@ -48,9 +48,11 @@ namespace WpfLibTest.Samples
             var first = Personnels[0];
             var second = Personnels[1];
             Personnels.RemoveRange(0, 2);
-            Personnels[0].Children = new List<Personnel>();
-            Personnels[0].Children.Add(first);
-            Personnels[0].Children.Add(second);
+            Personnels[0].Children = new List<Personnel>
+            {
+                first,
+                second
+            };
         }
     }
 

@@ -1,23 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Lils.WpfLib.Controls
 {
-    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof (AnimateTreeViewItem))]
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(AnimateTreeViewItem))]
     public class AnimateTreeView : TreeView
     {
         static AnimateTreeView()
@@ -26,12 +15,10 @@ namespace Lils.WpfLib.Controls
         }
 
         public static readonly DependencyProperty IsBranchSelectionEnableProperty =
-    DependencyProperty.Register("IsBranchSelectionEnable", typeof(bool), typeof(AnimateTreeView),
-        new PropertyMetadata(true));
+            DependencyProperty.Register("IsBranchSelectionEnable", typeof(bool), typeof(AnimateTreeView), new PropertyMetadata(true));
 
         public static readonly DependencyProperty AnimateTimeProperty =
-            DependencyProperty.Register("AnimateTime", typeof(Duration), typeof(AnimateTreeView),
-                new PropertyMetadata(default(Duration)));
+            DependencyProperty.Register("AnimateTime", typeof(Duration), typeof(AnimateTreeView), new PropertyMetadata(default(Duration)));
 
         public bool IsBranchSelectionEnable
         {
@@ -45,16 +32,11 @@ namespace Lils.WpfLib.Controls
             set { SetValue(AnimateTimeProperty, value); }
         }
 
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            return new AnimateTreeViewItem();
-        }
+        protected override DependencyObject GetContainerForItemOverride() => new AnimateTreeViewItem();
 
-        protected override bool IsItemItsOwnContainerOverride(object item)
-        {
-            return item is AnimateTreeViewItem;
-        }
+        protected override bool IsItemItsOwnContainerOverride(object item) => item is AnimateTreeViewItem;
     }
+
 
     [TemplatePart(Name = "PART_AnimateTarget", Type = typeof(FrameworkElement))]
     [TemplatePart(Name = "PART_Expander", Type = typeof(ToggleButton))]
@@ -63,36 +45,21 @@ namespace Lils.WpfLib.Controls
     public class AnimateTreeViewItem : TreeViewItem
     {
         public static readonly DependencyProperty AnimateTimeProperty =
-            DependencyProperty.Register("AnimateTime", typeof(Duration), typeof(AnimateTreeViewItem),
-                new PropertyMetadata(default(Duration), AnimateTimePropertyChanged));
+            DependencyProperty.Register("AnimateTime", typeof(Duration), typeof(AnimateTreeViewItem), new PropertyMetadata(default(Duration), AnimateTimePropertyChanged));
 
         public static readonly DependencyProperty IsBranchSelectionEnableProperty =
-            DependencyProperty.Register("IsBranchSelectionEnable", typeof(bool), typeof(AnimateTreeViewItem),
-                new PropertyMetadata(true));
-
-        private FrameworkElement _animateTarget;
-        private DoubleAnimation _collapseAnimation;
-        private DoubleAnimation _expandAnimation;
+            DependencyProperty.Register("IsBranchSelectionEnable", typeof(bool), typeof(AnimateTreeViewItem), new PropertyMetadata(true));
 
         static AnimateTreeViewItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(AnimateTreeViewItem),
-                new FrameworkPropertyMetadata(typeof(AnimateTreeViewItem)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(AnimateTreeViewItem), new FrameworkPropertyMetadata(typeof(AnimateTreeViewItem)));
         }
 
-        private DoubleAnimation ExpandAnimation => _expandAnimation ?? (_expandAnimation = new DoubleAnimation
-        {
-            To = 1,
-            Duration = AnimateTime,
-            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
-        });
+        private static QuadraticEase quadraticEaseInOut = new QuadraticEase { EasingMode = EasingMode.EaseInOut };
 
-        private DoubleAnimation CollapseAnimation => _collapseAnimation ?? (_collapseAnimation = new DoubleAnimation
-        {
-            To = 1,
-            Duration = AnimateTime,
-            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
-        });
+        private DoubleAnimation ExpandAnimation { get; } = new DoubleAnimation { To = 1, EasingFunction = quadraticEaseInOut };
+
+        private DoubleAnimation CollapseAnimation { get; } = new DoubleAnimation { To = 1, EasingFunction = quadraticEaseInOut };
 
         public bool IsBranchSelectionEnable
         {
@@ -106,37 +73,17 @@ namespace Lils.WpfLib.Controls
             set { SetValue(AnimateTimeProperty, value); }
         }
 
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            return new AnimateTreeViewItem();
-        }
+        protected override DependencyObject GetContainerForItemOverride() => new AnimateTreeViewItem();
 
-        protected override bool IsItemItsOwnContainerOverride(object item)
-        {
-            return item is AnimateTreeViewItem;
-        }
+        protected override bool IsItemItsOwnContainerOverride(object item) => item is AnimateTreeViewItem;
 
         protected override void OnSelected(RoutedEventArgs e)
         {
             base.OnSelected(e);
-            if (!IsBranchSelectionEnable)
+            if (!IsBranchSelectionEnable && HasItems)
             {
-                if (HasItems)
-                {
-                    IsSelected = false;
-                }
+                IsSelected = false;
             }
-        }
-
-        protected void Expand(Duration duration)
-        {
-            ExpandAnimation.Duration = duration;
-            _animateTarget?.BeginAnimation(HeightProperty, ExpandAnimation);
-        }
-
-        protected void Collapse()
-        {
-            _animateTarget?.BeginAnimation(HeightProperty, CollapseAnimation);
         }
 
         private static void AnimateTimePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -153,35 +100,36 @@ namespace Lils.WpfLib.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _animateTarget = GetTemplateChild("PART_AnimateTarget") as FrameworkElement;
+            var animateTarget = GetTemplateChild("PART_AnimateTarget") as FrameworkElement;
 
-            var expander = GetTemplateChild("PART_Expander") as ToggleButton;
-            if (expander != null)
+            if (GetTemplateChild("PART_Expander") is ToggleButton expander)
             {
-                expander.Checked += (s, e) => { Expand(AnimateTime); };
-                expander.Unchecked += (s, e) => { Collapse(); };
+                expander.Checked += (s, e) =>
+                {
+                    ExpandAnimation.Duration = AnimateTime;
+                    animateTarget?.BeginAnimation(HeightProperty, ExpandAnimation);
+                };
+
+                expander.Unchecked += (s, e) => animateTarget?.BeginAnimation(HeightProperty, CollapseAnimation);
             }
 
-            var itemsHost = GetTemplateChild("PART_ItemsHost") as FrameworkElement;
-            if (itemsHost != null)
+            if (GetTemplateChild("PART_ItemsHost") is FrameworkElement itemsHost)
             {
-                itemsHost.SizeChanged += ItemsHostOnSizeChanged;
+                itemsHost.SizeChanged += (s, e) =>
+                {
+                    ExpandAnimation.To = e.NewSize.Height;
+                    if (IsExpanded)
+                    {
+                        ExpandAnimation.Duration = TimeSpan.FromSeconds(0);
+                        animateTarget?.BeginAnimation(HeightProperty, ExpandAnimation);
+                    }
+                };
             }
 
-            var headerBorder = GetTemplateChild("PART_HeaderBorder") as FrameworkElement;
-            if (headerBorder != null)
+            if (GetTemplateChild("PART_HeaderBorder") is FrameworkElement headerBorder)
             {
                 headerBorder.MouseEnter += (s, e) => { VisualStateManager.GoToState(this, "HeaderMouseOver", false); };
                 headerBorder.MouseLeave += (s, e) => { VisualStateManager.GoToState(this, "HeaderNormal", false); };
-            }
-        }
-
-        private void ItemsHostOnSizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)
-        {
-            ExpandAnimation.To = sizeChangedEventArgs.NewSize.Height;
-            if (IsExpanded)
-            {
-                Expand(TimeSpan.FromSeconds(0));
             }
         }
     }

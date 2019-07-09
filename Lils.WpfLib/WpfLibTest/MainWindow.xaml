@@ -15,10 +15,10 @@
             <TabItem Header="Converters">
                 <samples:ConverterSampleView/>
             </TabItem>
-            <TabItem Header="Sliders" IsSelected="True">
+            <TabItem Header="Sliders">
                 <samples:SliderSampleView/>
             </TabItem>
-            <TabItem Header="AnimateTreeView">
+            <TabItem Header="AnimateTreeView" IsSelected="True">
                 <samples:AnimateTreeViewSampleView/>
             </TabItem>
         </TabControl>
