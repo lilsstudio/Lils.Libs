@@ -13,7 +13,7 @@ namespace Lils.WpfLib.Controls
     /// <summary>
     /// A slider can fill with content
     /// </summary>
-    [TemplatePart(Name = "PART_MoveYTranslate", Type = typeof(GeometryModel3D))]
+    [TemplatePart(Name = "PART_MoveYTranslate", Type = typeof(TranslateTransform3D))]
     public class ContentCube : Control
     {
         static ContentCube()
