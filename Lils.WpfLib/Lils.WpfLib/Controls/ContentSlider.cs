@@ -48,8 +48,6 @@ namespace Lils.WpfLib.Controls
             set { SetValue(MinimumProperty, value); }
         }
 
-
-
         public Orientation Orientation
         {
             get { return (Orientation)GetValue(OrientationProperty); }

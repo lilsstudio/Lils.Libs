@@ -40,6 +40,34 @@
                            Text="{Binding ElementName=ContentSlider, Path=Value}"/>
             </StackPanel>
         </GroupBox>
+        <GroupBox Header="ContentPalette" Padding="10">
+            <StackPanel Orientation="Horizontal">
+                <controls:ContentPalette Name="ContentPalette"
+                                        Width="100" Height="100">
+                    <Grid>
+                        <Rectangle Name="ColorRectangle" Fill="Red"/>
+                        <Rectangle Name="WhiteRectangle">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                    <GradientStop Color="White" Offset="0"/>
+                                    <GradientStop Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Name="BlackRectangle">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
+                                    <GradientStop Color="Black" Offset="0"/>
+                                    <GradientStop Offset="1" Color="#00000000"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
+                </controls:ContentPalette>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
+                           Text="{Binding ElementName=ContentPalette, Path=Value}"/>
+            </StackPanel>
+        </GroupBox>
         <GroupBox Header="ContentCube">
             <GroupBox.Resources>
                 <Viewport3D x:Key="brViewPort" Width="100" Height="100" HorizontalAlignment="Right" Margin="30">
