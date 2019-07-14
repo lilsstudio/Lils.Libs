@@ -2,6 +2,8 @@
 
 ## EnumToBooleanConverter
 
+![](../.res/md/img/EnumToBooleanConverter.gif)
+
 ```XAML
 <Window.Resources>
     <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
@@ -20,9 +22,9 @@
 <ListBox Grid.Column="2" VerticalAlignment="Top" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"/>
 ```
 
-![](../.res/md/img/EnumToBooleanConverter.gif)
-
 ## StringToBooleanConverter
+
+![](../.res/md/img/StringToBooleanConverter.gif)
 
 ```XAML
 <Window.Resources>
@@ -37,9 +39,9 @@
 <TextBox Grid.Column="1" Text="{Binding SampleText, UpdateSourceTrigger=PropertyChanged}"/>
 ```
 
-![](../.res/md/img/StringToBooleanConverter.gif)
-
 ## DoubleArithmeticConverter
+
+![](../.res/md/img/DoubleArithmeticConverter.gif)
 
 ```XAML
 <UserControl.Resources>
@@ -61,5 +63,3 @@
     <Slider Value="{Binding SliderValue, Converter={StaticResource DoublePlusConverter}, ConverterParameter=-10}"/>
 </StackPanel>
 ```
-
-![](../.res/md/img/DoubleArithmeticConverter.gif)
