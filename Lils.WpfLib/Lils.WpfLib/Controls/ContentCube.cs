@@ -200,8 +200,8 @@ namespace Lils.WpfLib.Controls
             Canvas.SetLeft(pointer, mousePos.X);
             Canvas.SetTop(pointer, mousePos.Y);
 
-            var ratioX = 1 - (mousePos.X / contentGrid.ActualWidth);
-            var ratioY = 1 - (mousePos.Y / contentGrid.ActualHeight);
+            var ratioX = mousePos.X / contentGrid.ActualWidth;
+            var ratioY = mousePos.Y / contentGrid.ActualHeight;
 
             var offset = Maximum - Minimum;
             var scaledOffset = new Vector3D(offset.X * ratioX, YOffset, offset.Y * ratioY);

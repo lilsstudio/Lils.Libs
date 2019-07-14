@@ -37,7 +37,7 @@
                     </Rectangle>
                 </controls:ContentSlider>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
-                           Text="{Binding ElementName=ContentSlider, Path=Value}"/>
+                           Text="{Binding ElementName=ContentSlider, Path=Value, StringFormat={}Value:{0}}"/>
             </StackPanel>
         </GroupBox>
         <GroupBox Header="ContentPalette" Padding="10">
@@ -64,8 +64,11 @@
                         </Rectangle>
                     </Grid>
                 </controls:ContentPalette>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
-                           Text="{Binding ElementName=ContentPalette, Path=Value}"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0">
+                    <Run Text="{Binding ElementName=ContentPalette, Path=Value.X, StringFormat={}X:{0}}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding ElementName=ContentPalette, Path=Value.Y, StringFormat={}Y:{0}}"/>
+                </TextBlock>
             </StackPanel>
         </GroupBox>
         <GroupBox Header="ContentCube">
@@ -251,8 +254,13 @@
                         </Border>
                     </controls:ContentCube.LayerContent>
                 </controls:ContentCube>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
-                           Text="{Binding ElementName=ContentCube, Path=Value}"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0">
+                    <Run Text="{Binding ElementName=ContentCube, Path=Value.X, StringFormat={}X:{0}}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding ElementName=ContentCube, Path=Value.Y, StringFormat={}Y:{0}}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding ElementName=ContentCube, Path=Value.Z, StringFormat={}Z:{0}}"/>
+                </TextBlock>
             </StackPanel>
         </GroupBox>
     </StackPanel>

@@ -67,10 +67,10 @@ namespace Lils.WpfLib.Controls
         }
 
         public static readonly DependencyProperty MaximumProperty =
-            DependencyProperty.Register("Maximum", typeof(Point), typeof(ContentPalette), new PropertyMetadata(new Point(0, 0)));
+            DependencyProperty.Register("Maximum", typeof(Point), typeof(ContentPalette), new PropertyMetadata(new Point(1, 1)));
 
         public static readonly DependencyProperty MinimumProperty =
-            DependencyProperty.Register("Minimum", typeof(Point), typeof(ContentPalette), new PropertyMetadata(new Point(1, 1)));
+            DependencyProperty.Register("Minimum", typeof(Point), typeof(ContentPalette), new PropertyMetadata(new Point(0, 0)));
 
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(Point), typeof(ContentPalette), new PropertyMetadata(new Point(0, 0)));
@@ -102,8 +102,8 @@ namespace Lils.WpfLib.Controls
             Canvas.SetLeft(pointer, mousePos.X);
             Canvas.SetTop(pointer, mousePos.Y);
 
-            var ratioX = 1 - (mousePos.X / contentGrid.ActualWidth);
-            var ratioY = 1 - (mousePos.Y / contentGrid.ActualHeight);
+            var ratioX = mousePos.X / contentGrid.ActualWidth;
+            var ratioY = mousePos.Y / contentGrid.ActualHeight;
 
             var offset = Maximum - Minimum;
             var scaledOffset = new Vector(offset.X * ratioX, offset.Y * ratioY);
