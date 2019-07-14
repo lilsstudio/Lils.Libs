@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
@@ -13,6 +14,7 @@ namespace Lils.WpfLib.Controls
     /// <summary>
     /// A slider can fill with content
     /// </summary>
+    [TemplatePart(Name = "PART_CubeViewport", Type = typeof(Viewport3D))]
     [TemplatePart(Name = "PART_MoveYTranslate", Type = typeof(TranslateTransform3D))]
     public class ContentCube : Control
     {
@@ -21,6 +23,7 @@ namespace Lils.WpfLib.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ContentCube), new FrameworkPropertyMetadata(typeof(ContentCube)));
         }
 
+        private Viewport3D cubeViewport3D;
         TranslateTransform3D moveYTranslate;
 
         public ContentCube()
@@ -100,6 +103,39 @@ namespace Lils.WpfLib.Controls
         {
             base.OnApplyTemplate();
             moveYTranslate = GetTemplateChild("PART_MoveYTranslate") as TranslateTransform3D;
+
+            cubeViewport3D = GetTemplateChild("PART_CubeViewport") as Viewport3D;
+
+            cubeViewport3D.MouseDown += CubeViewport3D_MouseAction;
+            cubeViewport3D.MouseMove += CubeViewport3D_MouseAction;
+
+            cubeViewport3D.MouseUp += (s, e) =>
+            {
+                previousPosition = null;
+                Mouse.Capture(null);
+            };
+
+        }
+
+        private Point? previousPosition;
+
+        private void CubeViewport3D_MouseAction(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Released)
+                return;
+
+            var currentPosition = e.GetPosition(cubeViewport3D);
+
+            if (!(previousPosition == null))
+            {
+                var yDiff = currentPosition.Y - previousPosition.Value.Y;
+                yDiff *= 1.5;
+                var newCurrentValue = CoerceYOffsetPropertyCallback(null, YOffset - yDiff / cubeViewport3D.ActualHeight);
+                SetCurrentValue(YOffsetProperty, newCurrentValue);
+            }
+
+            previousPosition = currentPosition;
+            Mouse.Capture(cubeViewport3D);
         }
     }
 }

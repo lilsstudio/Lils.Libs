@@ -198,7 +198,7 @@
                                       XYContent="{StaticResource brViewPort}"
                                       ZYContent="{StaticResource grViewPort}"
                                       XZContent="{StaticResource bgViewPort}"
-                                      YOffset="{Binding RedValuePercent}">
+                                      YOffset="{Binding RedValuePercent, Mode=TwoWay}">
                     <controls:ContentCube.LayerContent>
                         <Border Width="100" Height="100">
                             <Border.Background>
