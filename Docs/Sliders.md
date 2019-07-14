@@ -2,6 +2,8 @@
 
 ## ContentSlider
 
+![](../.res/md/img/ContentSlider.gif)
+
 ```XAML
 <UserControl.Resources>
     <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
@@ -27,9 +29,9 @@
 <TextBlock Text="{Binding ElementName=ContentSlider, Path=Value}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 ```
 
-![](../.res/md/img/ContentSlider.gif)
-
 ## ContentPalette
+
+![](../.res/md/img/ContentPalette.gif)
 
 ```XAML
 <controls:ContentPalette Name="ContentPalette"
@@ -61,9 +63,9 @@
 </TextBlock>
 ```
 
-![](../.res/md/img/ContentPalette.gif)
-
 ## ContentCube
+
+![](../.res/md/img/ContentCube.gif)
 
 ```XAML
 <UserControl.Resources>
@@ -183,5 +185,3 @@
     <Run Text="{Binding ElementName=ContentCube, Path=Value.Z, StringFormat={}Z:{0}}"/>
 </TextBlock>
 ```
-
-![](../.res/md/img/ContentCube.gif)
