@@ -1,19 +1,24 @@
-﻿using System.ComponentModel;
+﻿using Lils.WpfLib.Tools;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Lils.WpfLib.Tools;
 
 namespace Lils.WpfLib.Controls
 {
-    /// <summary>
-    /// A slider can fill with content
-    /// </summary>
-    [TemplatePart(Name = "PART_ContentGrid", Type = typeof(Grid))]
     [TemplatePart(Name = "PART_Pointer", Type = typeof(UIElement))]
-    public class ContentSlider : ContentControl
+    public class ContentPalette : ContentControl
     {
         #region private fields
 
@@ -25,38 +30,32 @@ namespace Lils.WpfLib.Controls
 
         #endregion
 
-        static ContentSlider()
+        static ContentPalette()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ContentSlider), new FrameworkPropertyMetadata(typeof(ContentSlider)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ContentPalette), new FrameworkPropertyMetadata(typeof(ContentPalette)));
         }
 
-        public ContentSlider()
+        public ContentPalette()
         {
             HorizontalContentAlignment = HorizontalAlignment.Stretch;
             VerticalContentAlignment = VerticalAlignment.Stretch;
         }
 
-        public double Maximum
+        public Point Maximum
         {
-            get { return (double)GetValue(MaximumProperty); }
+            get { return (Point)GetValue(MaximumProperty); }
             set { SetValue(MaximumProperty, value); }
         }
 
-        public double Minimum
+        public Point Minimum
         {
-            get { return (double)GetValue(MinimumProperty); }
+            get { return (Point)GetValue(MinimumProperty); }
             set { SetValue(MinimumProperty, value); }
         }
 
-        public Orientation Orientation
+        public Point Value
         {
-            get { return (Orientation)GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
-        }
-
-        public double Value
-        {
-            get { return (double)GetValue(ValueProperty); }
+            get { return (Point)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
 
@@ -68,19 +67,16 @@ namespace Lils.WpfLib.Controls
         }
 
         public static readonly DependencyProperty MaximumProperty =
-            DependencyProperty.Register("Maximum", typeof(double), typeof(ContentSlider), new PropertyMetadata(0.0));
+            DependencyProperty.Register("Maximum", typeof(Point), typeof(ContentPalette), new PropertyMetadata(new Point(1, 1)));
 
         public static readonly DependencyProperty MinimumProperty =
-            DependencyProperty.Register("Minimum", typeof(double), typeof(ContentSlider), new PropertyMetadata(1.0));
-
-        public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(ContentSlider), new PropertyMetadata(Orientation.Vertical));
+            DependencyProperty.Register("Minimum", typeof(Point), typeof(ContentPalette), new PropertyMetadata(new Point(0, 0)));
 
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(double), typeof(ContentSlider), new PropertyMetadata(0.0));
+            DependencyProperty.Register("Value", typeof(Point), typeof(ContentPalette), new PropertyMetadata(new Point(0, 0)));
 
         public static readonly DependencyProperty PointerProperty =
-            DependencyProperty.Register("Pointer", typeof(object), typeof(ContentSlider), new PropertyMetadata(null));
+            DependencyProperty.Register("Pointer", typeof(object), typeof(ContentPalette), new PropertyMetadata(null));
 
         public override void OnApplyTemplate()
         {
@@ -103,19 +99,16 @@ namespace Lils.WpfLib.Controls
             var limit = new Point(contentGrid.ActualWidth, contentGrid.ActualHeight);
             mousePos = mousePos.Coerce(new Point(0, 0), limit);
 
-            double ratio;
-            if (Orientation == Orientation.Horizontal)
-            {
-                Canvas.SetLeft(pointer, mousePos.X);
-                ratio = 1 - (mousePos.X / contentGrid.ActualWidth);
-            }
-            else
-            {
-                Canvas.SetTop(pointer, mousePos.Y);
-                ratio = 1 - (mousePos.Y / contentGrid.ActualHeight);
-            }
+            Canvas.SetLeft(pointer, mousePos.X);
+            Canvas.SetTop(pointer, mousePos.Y);
 
-            Value = (Maximum - Minimum) * ratio + Minimum;
+            var ratioX = mousePos.X / contentGrid.ActualWidth;
+            var ratioY = mousePos.Y / contentGrid.ActualHeight;
+
+            var offset = Maximum - Minimum;
+            var scaledOffset = new Vector(offset.X * ratioX, offset.Y * ratioY);
+
+            Value = scaledOffset + Minimum;
             Mouse.Capture(contentGrid);
         }
 

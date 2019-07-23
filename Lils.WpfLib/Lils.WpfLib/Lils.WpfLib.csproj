@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ContentCube.cs" />
+    <Compile Include="Controls\ContentPalette.cs" />
     <Compile Include="Controls\ContentSlider.cs" />
     <Compile Include="Converters\DoubleArithmeticConverter.cs" />
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
@@ -79,6 +80,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Themes\ContentSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Themes\ContentCube.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Themes\ContentPalette.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Themes\AnimateTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -11,7 +11,6 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     <UserControl.Resources>
         <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
-        <converters:DoubleArithmeticConverter x:Key="ByteToDoubleConverter" Operator="Times" DefaultOperateValue="0.00390625"/>
     </UserControl.Resources>
     <StackPanel Margin="10,0">
         <StackPanel.Resources>
@@ -38,7 +37,38 @@
                     </Rectangle>
                 </controls:ContentSlider>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
-                           Text="{Binding ElementName=ContentSlider, Path=Value}"/>
+                           Text="{Binding ElementName=ContentSlider, Path=Value, StringFormat={}Value:{0}}"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="ContentPalette" Padding="10">
+            <StackPanel Orientation="Horizontal">
+                <controls:ContentPalette Name="ContentPalette"
+                                        Width="100" Height="100">
+                    <Grid>
+                        <Rectangle Name="ColorRectangle" Fill="Red"/>
+                        <Rectangle Name="WhiteRectangle">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                    <GradientStop Color="White" Offset="0"/>
+                                    <GradientStop Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Name="BlackRectangle">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
+                                    <GradientStop Color="Black" Offset="0"/>
+                                    <GradientStop Offset="1" Color="#00000000"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
+                </controls:ContentPalette>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0">
+                    <Run Text="{Binding ElementName=ContentPalette, Path=Value.X, StringFormat={}X:{0}}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding ElementName=ContentPalette, Path=Value.Y, StringFormat={}Y:{0}}"/>
+                </TextBlock>
             </StackPanel>
         </GroupBox>
         <GroupBox Header="ContentCube">
@@ -165,63 +195,72 @@
                 </Viewport3D>
             </GroupBox.Resources>
             <StackPanel Orientation="Horizontal">
-                <Slider Name="slider1" Orientation="Vertical" Minimum="0" Maximum="0.995" Margin="5,0"
-                        Value="{Binding RedValuePercent}"/>
-                <Viewport3D x:Name="Layer" Width="100" Height="100" Margin="30,0">
-                    <Viewport3D.Camera>
-                        <OrthographicCamera Position="0,0,70"
-                                            LookDirection="0,0,-1"
-                                            UpDirection="0,1,0"
-                                            FarPlaneDistance="100" NearPlaneDistance="1"/>
-                    </Viewport3D.Camera>
-                    <ModelVisual3D>
-                        <ModelVisual3D.Content>
-                            <DirectionalLight Color="White" Direction="0,0,-1"/>
-                        </ModelVisual3D.Content>
-                    </ModelVisual3D>
-                    <ModelVisual3D>
-                        <ModelVisual3D.Content>
-                            <AmbientLight Color="Yellow"/>
-                        </ModelVisual3D.Content>
-                    </ModelVisual3D>
-                    <ModelVisual3D>
-                        <ModelVisual3D.Content>
-                            <GeometryModel3D>
-                                <GeometryModel3D.Geometry>
-                                    <MeshGeometry3D Positions="-1,-1,0 1,-1,0 1,1,0 -1,1,0"
-                                                    TriangleIndices="0,1,2 2,3,0"
-                                                    TextureCoordinates="1 0,0 0,0 1,1 1"
-                                                    Normals="0,1,0 0,1,0"/>
-                                </GeometryModel3D.Geometry>
-                                <GeometryModel3D.Material>
-                                    <DiffuseMaterial>
-                                        <DiffuseMaterial.Brush>
-                                            <LinearGradientBrush EndPoint="1,1" StartPoint="0,1">
-                                                <!--(1,r,1)-->
-                                                <GradientStop x:Name="Stop1r1" Color="{Binding GreenMax}"/>
-                                                <!--(1,r,0)-->
-                                                <GradientStop x:Name="Stop1r0" Color="{Binding GreenMin}" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </DiffuseMaterial.Brush>
-                                    </DiffuseMaterial>
-                                </GeometryModel3D.Material>
-                            </GeometryModel3D>
-                        </ModelVisual3D.Content>
-                    </ModelVisual3D>
-                </Viewport3D>
-                <controls:ContentCube Width="100" Height="100"
+                <controls:ContentCube Name="ContentCube"
+                                      Width="200" Height="100"
                                       XYContent="{StaticResource brViewPort}"
                                       ZYContent="{StaticResource grViewPort}"
                                       XZContent="{StaticResource bgViewPort}"
-                                      YOffset="{Binding RedValuePercent}">
+                                      YOffset="{Binding RedValuePercent, Mode=TwoWay}">
                     <controls:ContentCube.LayerContent>
                         <Border Width="100" Height="100">
                             <Border.Background>
-                                <VisualBrush Visual="{Binding ElementName=Layer}"/>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <Viewport3D x:Name="Layer" Width="60" Height="60" Margin="30,0">
+                                            <Viewport3D.Camera>
+                                                <OrthographicCamera Position="0,0,70"
+                                                                    LookDirection="0,0,-1"
+                                                                    UpDirection="0,1,0"
+                                                                    FarPlaneDistance="100" NearPlaneDistance="1"/>
+                                            </Viewport3D.Camera>
+                                            <ModelVisual3D>
+                                                <ModelVisual3D.Content>
+                                                    <DirectionalLight Color="White" Direction="0,0,-1"/>
+                                                </ModelVisual3D.Content>
+                                            </ModelVisual3D>
+                                            <ModelVisual3D>
+                                                <ModelVisual3D.Content>
+                                                    <AmbientLight Color="Yellow"/>
+                                                </ModelVisual3D.Content>
+                                            </ModelVisual3D>
+                                            <ModelVisual3D>
+                                                <ModelVisual3D.Content>
+                                                    <GeometryModel3D>
+                                                        <GeometryModel3D.Geometry>
+                                                            <MeshGeometry3D Positions="-1,-1,0 1,-1,0 1,1,0 -1,1,0"
+                                                                            TriangleIndices="0,1,2 2,3,0"
+                                                                            TextureCoordinates="1 0,0 0,0 1,1 1"
+                                                                            Normals="0,1,0 0,1,0"/>
+                                                        </GeometryModel3D.Geometry>
+                                                        <GeometryModel3D.Material>
+                                                            <DiffuseMaterial>
+                                                                <DiffuseMaterial.Brush>
+                                                                    <LinearGradientBrush EndPoint="1,1" StartPoint="0,1">
+                                                                        <!--(1,r,1)-->
+                                                                        <GradientStop Color="{Binding GreenMax}"/>
+                                                                        <!--(1,r,0)-->
+                                                                        <GradientStop Color="{Binding GreenMin}" Offset="1"/>
+                                                                    </LinearGradientBrush>
+                                                                </DiffuseMaterial.Brush>
+                                                            </DiffuseMaterial>
+                                                        </GeometryModel3D.Material>
+                                                    </GeometryModel3D>
+                                                </ModelVisual3D.Content>
+                                            </ModelVisual3D>
+                                        </Viewport3D>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
                             </Border.Background>
                         </Border>
                     </controls:ContentCube.LayerContent>
                 </controls:ContentCube>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0">
+                    <Run Text="{Binding ElementName=ContentCube, Path=Value.X, StringFormat={}X:{0}}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding ElementName=ContentCube, Path=Value.Y, StringFormat={}Y:{0}}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding ElementName=ContentCube, Path=Value.Z, StringFormat={}Z:{0}}"/>
+                </TextBlock>
             </StackPanel>
         </GroupBox>
     </StackPanel>

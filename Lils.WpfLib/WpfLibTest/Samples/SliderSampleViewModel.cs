@@ -12,7 +12,7 @@ namespace WpfLibTest.Samples
     {
         public double RedValuePercent { get; set; }
 
-        public byte RedValue => Convert.ToByte(RedValuePercent * 256);
+        public byte RedValue => Convert.ToByte(RedValuePercent * 255);
 
         public Color GreenMax => Color.FromRgb(RedValue, 255, 255);
 
