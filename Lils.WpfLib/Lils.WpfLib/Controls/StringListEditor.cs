@@ -7,6 +7,10 @@ using System.Windows.Media;
 
 namespace Lils.WpfLib.Controls
 {
+    /// <summary>
+    /// 字符串列表编辑器
+    /// 已应用在：LilsKanban.Controls
+    /// </summary>
     public class StringListEditor : Control
     {
         public static RoutedCommand RemoveItemCommand = new RoutedUICommand("Remove", "Remove", typeof(StringListEditor));
