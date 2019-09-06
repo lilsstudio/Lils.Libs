@@ -15,8 +15,11 @@
             <TabItem Header="Converters">
                 <samples:ConverterSampleView/>
             </TabItem>
-            <TabItem Header="Sliders" IsSelected="True">
+            <TabItem Header="Sliders">
                 <samples:SliderSampleView/>
+            </TabItem>
+            <TabItem Header="StringListEditor" IsSelected="True">
+                <samples:StringListEditorSampleView/>
             </TabItem>
         </TabControl>
     </Grid>

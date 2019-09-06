@@ -8,6 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/Lils.WpfLib;component/Themes/ContentSlider.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Lils.WpfLib;component/Themes/ContentCube.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Lils.WpfLib;component/Themes/ContentPalette.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Lils.WpfLib;component/Themes/StringListEditor.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

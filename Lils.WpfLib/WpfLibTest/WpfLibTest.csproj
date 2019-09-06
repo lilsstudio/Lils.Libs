@@ -83,6 +83,10 @@
       <DependentUpon>SliderSampleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\SliderSampleViewModel.cs" />
+    <Compile Include="Samples\StringListEditorSampleView.xaml.cs">
+      <DependentUpon>StringListEditorSampleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\StringListEditorSampleViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\SliderSampleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\StringListEditorSampleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
